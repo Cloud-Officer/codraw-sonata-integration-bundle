@@ -29,7 +29,7 @@ class UserCountBlock extends AbstractBlockService
         }
 
         foreach ($filters as $name => $data) {
-            $datagrid->setValue($name, $data['type'] ?? null, $data['value']);
+            $datagrid->setValue($name, $data['type'] ?? null, $data['value'] ?? null);
         }
 
         $datagrid->buildPager();

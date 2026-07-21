@@ -21,7 +21,7 @@ class RefreshUserLockExtension extends AbstractAdminExtension
         $collection->add(
             'refresh-user-locks',
             $admin->getRouterIdParameter().'/refresh-user-locks',
-            ['_controller' => RefreshUserLockController::class.':refreshUserLocksAction']
+            ['_controller' => RefreshUserLockController::class.'::refreshUserLocksAction']
         );
     }
 

@@ -20,6 +20,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -40,7 +41,9 @@ class ExecutionAdmin extends AbstractAdmin
 
         if ($this->hasRequest() && $this->getRequest()->isMethod(Request::METHOD_GET)) {
             if ($commandName = $this->getRequest()->get('command')) {
-                $command = $this->commandFactory->getCommand($commandName);
+                if (null === $command = $this->commandFactory->getCommand($commandName)) {
+                    throw new NotFoundHttpException(\sprintf('Command "%s" not found', $commandName));
+                }
                 $execution->setCommand($command->getName());
                 $execution->setCommandName($command->getCommandName());
             }

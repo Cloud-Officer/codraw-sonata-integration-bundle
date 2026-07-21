@@ -8,7 +8,7 @@
         "sonata"
     ],
     "require": {
-        "php": ">=8.5",
+        "php": "^8.5",
         "codraw/framework-extra-bundle": "^0.39",
         "codraw/sonata-extra-bundle": "^0.39",
         "symfony/framework-bundle": "^6.4.0",
@@ -19,6 +19,8 @@
     "require-dev": {
         "codraw/application": "^0.39",
         "codraw/console": "^0.39",
+        "codraw/cron-job": "^0.39",
+        "codraw/entity-migrator": "^0.39",
         "codraw/messenger": "^0.39",
         "codraw/security": "^0.39",
         "codraw/tester": "^0.39",
@@ -29,6 +31,18 @@
         "scheb/2fa-email": "^7.6",
         "endroid/qr-code": "^6.0",
         "scheb/2fa-totp": "^7.6"
+    },
+    "suggest": {
+        "codraw/application": "To integrate the configuration entity admin",
+        "codraw/console": "To integrate the console command execution admin",
+        "codraw/cron-job": "To integrate the cron job admins",
+        "codraw/entity-migrator": "To integrate the entity migrator admins",
+        "codraw/messenger": "To integrate the messenger message admin",
+        "codraw/security": "To use the admin login authenticator of the user integration",
+        "codraw/user-bundle": "To integrate the user management (login, password change, user locks, 2FA)",
+        "scheb/2fa-bundle": "To integrate the 2FA management in the user admin",
+        "scheb/2fa-email": "To use the 2FA by email integration (resend code action)",
+        "scheb/2fa-totp": "To use the 2FA by TOTP integration"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

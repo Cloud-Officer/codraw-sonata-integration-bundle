@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ConfigAdmin extends AbstractAdmin
@@ -33,7 +34,17 @@ class ConfigAdmin extends AbstractAdmin
 
         $form->get('data')->addModelTransformer(new CallbackTransformer(
             static fn ($data) => null !== $data ? json_encode($data, \JSON_PRETTY_PRINT) : null,
-            static fn ($data) => !empty($data) ? json_decode((string) $data, true, 512, \JSON_THROW_ON_ERROR) : null
+            static function ($data) {
+                if (empty($data)) {
+                    return null;
+                }
+
+                try {
+                    return json_decode((string) $data, true, 512, \JSON_THROW_ON_ERROR);
+                } catch (\JsonException $error) {
+                    throw new TransformationFailedException($error->getMessage(), 0, $error);
+                }
+            }
         ));
     }
 
