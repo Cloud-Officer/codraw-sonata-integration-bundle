@@ -1,6 +1,6 @@
 # Sonata Integration Bundle
 
-This bundle is for draw/* component integration in sonata.
+This bundle is for codraw/* component integration in sonata.
 
 ## Console
 
